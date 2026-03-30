@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Time Shift | Enhancement Workbench</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#504931",
+              "on-tertiary-container": "#3e4229",
+              "on-primary-fixed-variant": "#623f18",
+              "on-secondary-fixed": "#211b08",
+              "surface-tint": "#f0bd8b",
+              "surface-container-highest": "#353535",
+              "surface-container-low": "#1c1b1b",
+              "on-primary-fixed": "#2c1600",
+              "surface-container": "#20201f",
+              "primary-container": "#d4a373",
+              "on-surface": "#e5e2e1",
+              "primary-fixed": "#ffdcbd",
+              "surface-container-lowest": "#0e0e0e",
+              "tertiary-container": "#abaf8e",
+              "on-secondary-container": "#c3b89a",
+              "surface-dim": "#131313",
+              "primary": "#f2be8c",
+              "surface-bright": "#393939",
+              "inverse-primary": "#7d562d",
+              "secondary": "#d2c6a7",
+              "secondary-fixed-dim": "#d2c6a7",
+              "outline": "#9c8e82",
+              "on-primary": "#482904",
+              "inverse-on-surface": "#313030",
+              "on-tertiary-fixed": "#1a1d07",
+              "surface-variant": "#353535",
+              "on-primary-container": "#5b3912",
+              "tertiary": "#c6caa8",
+              "inverse-surface": "#e5e2e1",
+              "tertiary-fixed": "#e1e6c2",
+              "surface-container-high": "#2a2a2a",
+              "on-tertiary-fixed-variant": "#45492f",
+              "on-secondary-fixed-variant": "#4e462f",
+              "on-background": "#e5e2e1",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "background": "#131313",
+              "on-secondary": "#37301b",
+              "outline-variant": "#50453b",
+              "on-error": "#690005",
+              "on-tertiary": "#2e321a",
+              "secondary-fixed": "#eee2c2",
+              "on-error-container": "#ffdad6",
+              "surface": "#131313",
+              "tertiary-fixed-dim": "#c5c9a7",
+              "on-surface-variant": "#d4c4b7",
+              "primary-fixed-dim": "#f0bd8b"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-panel {
+        background: rgba(28, 27, 27, 0.6);
+        backdrop-filter: blur(24px);
+      }
+      .ghost-border {
+        border: 1px solid rgba(156, 142, 130, 0.15);
+      }
+      input[type='range']::-webkit-slider-runnable-track {
+        background: #353535;
+        height: 4px;
+        border-radius: 2px;
+      }
+      input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        background: #f2be8c;
+        cursor: pointer;
+        margin-top: -6px;
+        box-shadow: 0 0 10px rgba(242, 190, 140, 0.3);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen w-64 bg-[#1c1b1b] border-r border-transparent shadow-[48px_0_48px_rgba(0,0,0,0.2)] z-20 sticky top-0 py-6">
+<div class="px-6 mb-10">
+<h1 class="text-lg font-bold text-[#e5e2e1] mb-1">Workbench</h1>
+<p class="text-xs font-label text-[#e5e2e1] opacity-50 uppercase tracking-widest">Digital Archivist v2.4</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 text-[#e5e2e1] opacity-50 font-['Inter'] text-sm font-medium hover:bg-[#2a2a2a] hover:opacity-100 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span>Time Shift</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#e5e2e1] opacity-50 font-['Inter'] text-sm font-medium hover:bg-[#2a2a2a] hover:opacity-100 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span>Colorization</span>
+</a>
+<!-- Active Tab: Enhancement -->
+<a class="flex items-center gap-3 px-3 py-3 bg-[#d4a373]/10 text-[#f2be8c] rounded-r-full font-['Inter'] text-sm font-medium transition-all" href="#">
+<span class="material-symbols-outlined">auto_fix_high</span>
+<span>Enhancement</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#e5e2e1] opacity-50 font-['Inter'] text-sm font-medium hover:bg-[#2a2a2a] hover:opacity-100 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span>Batch Process</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<div class="flex items-center gap-3 pt-6 border-t border-outline-variant/15">
+<img alt="User profile" class="w-8 h-8 rounded-full object-cover" data-alt="professional portrait of a middle-aged man with short hair and clean-shaven face, warm museum-style studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC_7jkB4vPBwEOGXiQKHXUshKGRpEbxbpVDFVJNuT_PjzdiGtEiPtCpnE4-TMX5yUj381kg3AGYMwkdKW_XQfJLFSz33EstS31P7sxmQi9ot1G2rxDOFMgPxu7gkzUMYirWJZZOUrpHGwsdkxjNHtkzAWLPdLX_lZoea8GefTfOql9G_uiyElhthWbGyi6OxKfACE1q3_kv0cS3qkS04kEMwh9S05E-xA8gj84OnzMTEuCm_PjNBxiyGkT_-wAuelEYgAcm3Lao3A"/>
+<div>
+<p class="text-xs font-semibold text-[#e5e2e1]">Alexandros V.</p>
+<p class="text-[10px] text-primary/70">Lead Conservator</p>
+</div>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar -->
+<header class="bg-[#131313] sticky top-0 z-10">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-['Noto_Serif'] font-bold text-[#e5e2e1] italic">Time Shift</span>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-[#e5e2e1] opacity-70 font-['Noto_Serif'] font-medium tracking-tight hover:text-[#f2be8c] transition-colors duration-300" href="#">Gallery</a>
+<a class="text-[#e5e2e1] opacity-70 font-['Noto_Serif'] font-medium tracking-tight hover:text-[#f2be8c] transition-colors duration-300" href="#">Archive</a>
+<a class="text-[#e5e2e1] opacity-70 font-['Noto_Serif'] font-medium tracking-tight hover:text-[#f2be8c] transition-colors duration-300" href="#">Techniques</a>
+<a class="text-[#e5e2e1] opacity-70 font-['Noto_Serif'] font-medium tracking-tight hover:text-[#f2be8c] transition-colors duration-300" href="#">About</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#e5e2e1] opacity-70 hover:text-[#f2be8c] active:scale-95 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-[#e5e2e1] opacity-70 hover:text-[#f2be8c] active:scale-95 transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Workspace -->
+<main class="flex-1 flex flex-col md:flex-row p-6 lg:p-10 gap-8 overflow-hidden">
+<!-- Left Column: Canvas -->
+<div class="flex-1 flex flex-col min-h-[400px]">
+<div class="mb-6 flex justify-between items-end">
+<div>
+<span class="text-primary text-xs font-label font-bold tracking-widest uppercase mb-1 block">Precision Workspace</span>
+<h2 class="text-3xl font-headline italic">Detail Enhancement</h2>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-xs font-label uppercase tracking-widest text-primary border border-primary/20 rounded-sm hover:bg-primary/5 transition-all">Original</button>
+<button class="px-4 py-2 text-xs font-label uppercase tracking-widest bg-primary text-on-primary font-bold rounded-sm shadow-[0_0_15px_rgba(242,190,140,0.2)] hover:shadow-[0_0_20px_rgba(242,190,140,0.4)] transition-all">Compare</button>
+</div>
+</div>
+<!-- Archival Upload Zone / Workspace -->
+<div class="flex-1 bg-surface-container-lowest rounded-lg ghost-border relative flex items-center justify-center group overflow-hidden">
+<!-- Subtle Radial Glow Background -->
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(242,190,140,0.05)_0%,_transparent_70%)]"></div>
+<div class="relative z-10 flex flex-col items-center text-center p-8 max-w-sm">
+<div class="w-20 h-20 mb-6 rounded-full bg-surface-container-low flex items-center justify-center ghost-border group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
+<span class="material-symbols-outlined text-4xl text-primary opacity-50 group-hover:opacity-100">upload_file</span>
+</div>
+<h3 class="font-headline text-xl mb-2 text-on-surface">Drop Image for Enhancement</h3>
+<p class="text-on-surface/50 text-sm mb-6 leading-relaxed">Support for high-resolution TIFF, RAW, and archived JPEG. AI engine will automatically analyze grain structure.</p>
+<button class="px-8 py-3 bg-primary text-on-primary font-bold rounded-sm text-sm uppercase tracking-widest transition-all hover:scale-105 active:scale-95">Browse Archives</button>
+</div>
+<!-- Decorative Grid Lines -->
+<div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.03]" style="background-image: radial-gradient(circle, #f2be8c 1px, transparent 1px); background-size: 40px 40px;"></div>
+</div>
+</div>
+<!-- Right Column: Controls -->
+<aside class="w-full md:w-80 lg:w-96 flex flex-col gap-6">
+<!-- Parameters Card -->
+<section class="bg-surface-container-low p-6 rounded-lg ghost-border">
+<div class="flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary text-xl">tune</span>
+<h3 class="font-label text-sm font-bold uppercase tracking-widest">Enhancement Parameters</h3>
+</div>
+<div class="space-y-10">
+<!-- Control: Texture Recovery -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="text-xs font-label font-medium text-on-surface/80">Texture Recovery</label>
+<span class="text-primary font-mono text-xs">84%</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest appearance-none cursor-pointer" type="range" value="84"/>
+<p class="text-[10px] text-on-surface/40 leading-tight">Restores structural definition in over-exposed or motion-blurred areas.</p>
+</div>
+<!-- Control: Grain Reduction -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="text-xs font-label font-medium text-on-surface/80">Grain Reduction</label>
+<span class="text-primary font-mono text-xs">32%</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest appearance-none cursor-pointer" type="range" value="32"/>
+<p class="text-[10px] text-on-surface/40 leading-tight">Balances chemical silver grain with digital clarity without loss of "soul".</p>
+</div>
+<!-- Control: Facial Detail -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="text-xs font-label font-medium text-on-surface/80">Facial Detail</label>
+<span class="text-primary font-mono text-xs">61%</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest appearance-none cursor-pointer" type="range" value="61"/>
+<p class="text-[10px] text-on-surface/40 leading-tight">Specifically targets eyes and skin textures for historical portrait recovery.</p>
+</div>
+</div>
+<div class="mt-10 pt-6 border-t border-outline-variant/15">
+<button class="w-full py-4 bg-primary text-on-primary font-bold rounded-sm text-sm uppercase tracking-widest shadow-[0_0_15px_rgba(242,190,140,0.2)] hover:shadow-[0_0_25px_rgba(242,190,140,0.4)] transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">auto_fix</span>
+                            Apply Enhancement
+                        </button>
+</div>
+</section>
+<!-- Information Bento -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-lg ghost-border">
+<span class="text-[10px] uppercase tracking-tighter text-on-surface/40 block mb-1">Model Engine</span>
+<span class="text-xs font-semibold">Turing-V4 Archival</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg ghost-border">
+<span class="text-[10px] uppercase tracking-tighter text-on-surface/40 block mb-1">Inference Time</span>
+<span class="text-xs font-semibold">1.2s - 4K Ready</span>
+</div>
+</div>
+<!-- History / Recent Section -->
+<section class="flex-1 min-h-[120px] bg-surface-container-low p-4 rounded-lg ghost-border overflow-hidden">
+<h4 class="text-[10px] font-bold uppercase tracking-widest text-on-surface/40 mb-4">Recent Enhancements</h4>
+<div class="flex gap-3">
+<div class="w-16 h-16 rounded-sm overflow-hidden bg-surface-container-highest relative group">
+<img class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" data-alt="vintage black and white photograph of a woman with sharp focused eyes after digital restoration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo1cgkAMEvYHQHWKmNhv2ThLj05aHfTfNxP6a14yLPlG-NhqmddHCGF7nwecfh2NL0ZbbnwqQSFQDsSReOdAVNtnSHgkzOuxV5-DPzZGF8yd7TqLzF5DEV24O7UUUYlHt1JNjWAUOVpR62rtcphBFs3CVVdR9bDsKFQizvm25WRGLFGSqrSAp23tiXkf9xqWrZDGGmbA3IjwhXILDwRjtQwykgGwL3eKx4sLQwsgCaMnYui92qs61rjkiUxEFM1Kff017kIE5uAkQ"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-primary/20 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm text-on-primary">open_in_new</span>
+</div>
+</div>
+<div class="w-16 h-16 rounded-sm overflow-hidden bg-surface-container-highest relative group">
+<img class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" data-alt="restored old sepia photograph of a golden retriever dog with enhanced fur texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz252vp8LHHgXI2NXY--Lz44j4afxP7MTFwY5Dm665Suu2yI1mkQL7sW4dLJDr9G0lrf0d6T9kPOf5zGYOl3gCPd_-yeZ0jP503TqCIo52dVz-XpxlAfptNDU9u2qWMrArBE_st7w58Xqc_JLxCkDuDcjNGuo52OHDQYeYILVILtRz3gSz2dXwRpdrUV_j-090T9G9mYoppmDfwtTuHn6z6xezDx0FM5RfOdZ7qF-iEB_J7VKJqZBWpwrEOT7LAjobh71PTic3s8A"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-primary/20 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm text-on-primary">open_in_new</span>
+</div>
+</div>
+<div class="w-16 h-16 rounded-sm bg-surface-container-highest flex items-center justify-center ghost-border text-on-surface/20 hover:text-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined">add</span>
+</div>
+</div>
+</section>
+</aside>
+</main>
+<!-- Footer -->
+<footer class="bg-[#131313] border-t border-[#e5e2e1]/15">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 w-full max-w-screen-2xl mx-auto gap-8">
+<div class="text-center md:text-left">
+<span class="text-[#e5e2e1] font-semibold mb-2 block">Time Shift Digital Archive</span>
+<p class="font-['Inter'] text-xs uppercase tracking-widest text-[#e5e2e1]/40 leading-relaxed">
+                        © 2024 Time Shift Digital Archive. Preserving history through precision AI.
+                    </p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#f2be8c] transition-opacity duration-200" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#f2be8c] transition-opacity duration-200" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#f2be8c] transition-opacity duration-200" href="#">API Documentation</a>
+</div>
+</div>
+</footer>
+</div>
+<!-- Mobile Navigation (Only visible on small screens) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#1c1b1b] px-6 py-4 flex justify-around items-center z-50 border-t border-outline-variant/10">
+<button class="flex flex-col items-center gap-1 text-on-surface/40">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="text-[10px] uppercase font-bold">Shift</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface/40">
+<span class="material-symbols-outlined">palette</span>
+<span class="text-[10px] uppercase font-bold">Color</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">auto_fix_high</span>
+<span class="text-[10px] uppercase font-bold">Enhance</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface/40">
+<span class="material-symbols-outlined">layers</span>
+<span class="text-[10px] uppercase font-bold">Batch</span>
+</button>
+</nav>
+</body></html>
